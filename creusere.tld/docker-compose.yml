@@ -1,0 +1,39 @@
+version: "3.6"
+
+services:
+   db_node_domain:
+     image: mysql:5.7
+     volumes:
+       - db_data:/var/lib/mysql
+     restart: always
+     ports:
+       - 3306:3306
+     environment:
+       MYSQL_ROOT_PASSWORD: wordpress
+       MYSQL_DATABASE: wordpress
+       MYSQL_USER: wordpress
+       MYSQL_PASSWORD: wordpress
+     container_name: wordpress_db
+
+   wordpress:
+     depends_on:
+       - db_node_domain
+     image: wordpress:latest
+     expose:
+       - 3000
+     restart: always
+     environment:
+       VIRTUAL_HOST: creusere.com
+       VIRTUAL_PORT: 3000
+       WORDPRESS_DB_HOST: db_node_domain:3306
+       WORDPRESS_DB_USER: wordpress
+       WORDPRESS_DB_PASSWORD: wordpress
+     container_name: wordpress
+volumes:
+    db_data:
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
+
