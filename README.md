@@ -32,23 +32,30 @@ git clone https://github.com/dockerworxinc/nginx-reverse-proxy
 
 ```
 cd nginx-reverse-proxy/creusere.tld
-docker stack deploy -c docker-compose.yml mystack1
+docker stack deploy -c docker-compose.yml wp_stack_1
 ```
 
 ## Bringing up NextCloud Stack
 
 ```
 cd nginx-reverse-proxy/nextcloud.tld
-docker stack deploy -c docker-compose.yml mystack2
+docker stack deploy -c docker-compose.yml nxt_stack_
 ```
 
 ## Bringing up Nginx Stack
 
 ```
 cd nginx-reverse-proxy/nginx-proxy
-docker stack deploy -c docker-compose.yml mystack3
+docker stack deploy -c docker-compose.yml proxy_stack
 ```
 
+## Scale up the containers using swarm for High Availability
+
+```
+docker service scale wp_stack_1=5
+docker service scale nxt_stack_1=5
+docker service scale proxy_stack=5
+```
 
 # A Bonus
 
@@ -60,6 +67,7 @@ docker service create   --name=viz   --publish=8084:8080/tcp   --constraint=node
 
 ##  How to start Portainer
 
+ - user - admin, password - portainer
 ```
 docker service create --name portainer --publish 9000:9000 --replicas=1 --constraint 'node.role == manager' --mount type=bind,src=//var/run/docker.sock,dst=/var/run/docker.sock --mount type=volume,src=portainer_data,dst=/data portainer/portainer -H unix:///var/run/docker.sock
 ```
