@@ -19,7 +19,7 @@ chmod +x /usr/local/bin/docker-compose
 ## Initialize Swarm Repository
 
 ```
-docker swarm init --advertise-addr <ip> --listen-addr <ip>:2377
+docker swarm init --advertise-addr <vps-ip> --listen-addr <vps-ip>:2377
 ```
 
 ## Clone this Repository
