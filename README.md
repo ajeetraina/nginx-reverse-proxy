@@ -49,7 +49,7 @@ cd nginx-reverse-proxy/nginx-proxy
 docker stack deploy -c docker-compose.yml proxy_stack
 ```
 
-## Scale up the containers using swarm for High Availability
+## Scale up the containers using swarm for High Availability[Optional]
 
 ```
 docker service scale wp_stack_1=5
