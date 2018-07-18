@@ -39,7 +39,7 @@ docker stack deploy -c docker-compose.yml wp_stack_1
 
 ```
 cd nginx-reverse-proxy/nextcloud.tld
-docker stack deploy -c docker-compose.yml nxt_stack_
+docker stack deploy -c docker-compose.yml nxt_stack_1
 ```
 
 ## Bringing up Nginx Stack
